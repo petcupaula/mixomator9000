@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "mixomator9000",
+    "staging": "mixomator9000"
+  }
+}

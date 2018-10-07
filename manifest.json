@@ -1,0 +1,13 @@
+{
+  "name": "mixomator9000",
+  "short_name": "mixomator9000",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [{
+  "src": "images/icons/friendlyeats-192x192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }],
+  "theme_color": "#B71C1C"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "mixomator9000",
+  "version": "0.0.0",
+  "description": "mixomator9000",
+  "main": ".",
+  "scripts": {
+    "fmt": "prettier --write scripts/* styles/*"
+  },
+  "author": "",
+  "devDependencies": {
+    "prettier": "^1.5.3"
+  }
+}
