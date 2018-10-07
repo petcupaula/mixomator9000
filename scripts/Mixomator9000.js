@@ -38,10 +38,10 @@ function Mixomator9000() {
     .then(function() {
       that.initTemplates();
       that.initRouter();
-      that.initReviewDialog();
       that.initFilterDialog();
       that.initAddDrinkDialog();
       that.initEditPumpDialog();
+      that.initEditDrinkDialog();
     }).catch(function(err) {
       console.log(err);
     });

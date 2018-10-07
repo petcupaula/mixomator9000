@@ -77,3 +77,16 @@ Mixomator9000.prototype.updatePump = function(pumpID, val) {
       console.error("Error updating document: ", error);
   })*/;
 };
+
+Mixomator9000.prototype.updateDrink = function(drinkId, data) {
+  var collection = firebase.firestore().collection('drinks');
+  var document = collection.doc(drinkId);
+  return document.update(data)
+  /*.then(function() {
+      console.log("Document successfully updated!");
+  })
+  .catch(function(error) {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
+  })*/;
+};
