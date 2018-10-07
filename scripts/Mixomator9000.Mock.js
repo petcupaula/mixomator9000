@@ -16,14 +16,18 @@
 'use strict';
 
 /**
- * Adds a set of mock Restaurants to the Cloud Firestore.
+ * Adds a set of mock Drinks to the Cloud Firestore.
  */
 Mixomator9000.prototype.addMockDrinks = function() {
   var promises = [];
 
   var promise = this.addDrink({
     name: "Test Drink",
-    type: "nonalcoholic"
+    type: "nonalcoholic",
+    ingredients: {
+      orangejuice: 100,
+      vodka: 100
+    }
   });
 
   if (!promise) {
@@ -34,21 +38,4 @@ Mixomator9000.prototype.addMockDrinks = function() {
   }
 
   return Promise.all(promises);
-};
-
-/**
- * Adds a set of mock Ratings to the given Restaurant.
- */
-Mixomator9000.prototype.addMockRatings = function(restaurantID) {
-  var ratingPromises = [];
-  for (var r = 0; r < 5*Math.random(); r++) {
-    var rating = this.data.ratings[
-      parseInt(this.data.ratings.length*Math.random())
-    ];
-    rating.userName = 'Bot (Web)';
-    rating.timestamp = new Date();
-    rating.userId = firebase.auth().currentUser.uid;
-    ratingPromises.push(this.addRating(restaurantID, rating));
-  }
-  return Promise.all(ratingPromises);
 };

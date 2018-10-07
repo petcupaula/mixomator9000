@@ -98,19 +98,17 @@ Mixomator9000.prototype.viewList = function(filters, filter_description) {
   var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
   toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
 
-  mdc.autoInit();
-
   var addEl = this.renderTemplate('add-drinks');
   var button = addEl.querySelector('#add_drink');
   var that = this;
-  button.addEventListener('click', function(event) {
-    event.target.style.opacity = '0.4';
-    event.target.innerText = 'Please wait...';
+  button.addEventListener('click', function() {
     that.addMockDrinks().then(function() {
       that.rerender();
     });
   });
+  document.querySelector('main').append(addEl);
 
+  mdc.autoInit();
   
 };
 
@@ -120,13 +118,13 @@ Mixomator9000.prototype.viewSetup = function() {
   });
 
   var config = this.getFirebaseConfig();
-  var noRestaurantsEl = this.renderTemplate('add-drinks', config);
+  //var noRestaurantsEl = this.renderTemplate('add-drinks', config);
 
-  var button = noRestaurantsEl.querySelector('#add_drink');
+  //var button = noRestaurantsEl.querySelector('#add_drink');
   var addingMockData = false;
 
   var that = this;
-  button.addEventListener('click', function(event) {
+  /*button.addEventListener('click', function(event) {
     if (addingMockData) {
       return;
     }
@@ -139,10 +137,10 @@ Mixomator9000.prototype.viewSetup = function() {
     that.addMockDrinks().then(function() {
       that.rerender();
     });
-  });
+  });*/
 
   this.replaceElement(document.querySelector('.header'), headerEl);
-  this.replaceElement(document.querySelector('main'), noRestaurantsEl);
+  //this.replaceElement(document.querySelector('main'), noRestaurantsEl);
 
   firebase
     .firestore()

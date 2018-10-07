@@ -50,7 +50,7 @@ Mixomator9000.prototype.getFilteredDrinks = function(filters, render) {
   var query = firebase.firestore().collection('drinks');
 
   if (filters.type !== 'Any') {
-    query = query.where('type', '==', filters.category);
+    query = query.where('type', '==', filters.type);
   }
 
   this.getDocumentsInQuery(query, render);
