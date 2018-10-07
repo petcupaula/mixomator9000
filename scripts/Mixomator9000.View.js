@@ -323,6 +323,9 @@ Mixomator9000.prototype.viewDrink = function(id) {
       };*/
 
       sectionHeaderEl = that.renderTemplate('drink-header', data);
+      that.replaceElement(document.querySelector('.header'), sectionHeaderEl);
+      var mainEl = that.renderTemplate('main');
+      that.replaceElement(document.querySelector('main'), mainEl);
       /*sectionHeaderEl
         .querySelector('.rating')
         .append(that.renderRating(data.avgRating));
