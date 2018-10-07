@@ -77,6 +77,12 @@
     </div>
   </div>
 
+  <div hidden class="template" id="main-pump-adjusted">
+      <div id="message-cards-container" class="mdc-layout-grid mdc-toolbar-fixed-adjust">
+        <div id="cards" class="mdc-layout-grid__inner"></div>
+      </div>
+    </div>
+
   <div hidden class="template" id="main">
     <div id="message-cards-container" class="mdc-layout-grid">
       <div id="cards" class="mdc-layout-grid__inner"></div>
@@ -143,7 +149,9 @@
                 <div class="max_width_600">
                   <h2 data-fir-content="name"></h2>
                   <div class="details">
-                    <span class="info" data-fir-content="type"></span>
+                    Type: <span class="info" data-fir-content="type"></span>
+                    <br/>
+                    Ingredients: <span class="info" data-fir-content="ing"></span>
                   </div>
                 </div>
               </div>
@@ -183,7 +191,19 @@
         <div class="details">
           <span class="info" data-fir-content="type"></span>
         </div>
+      </div>
+    </div>
+  </div>
 
+  <div hidden class="template mdc-layout-grid__cell mdc-layout-grid__cell--span-3" id="pump-card">
+    <div class="location-card mdc-card mdc-shadow--2dp" data-fir-click="go_to_pump">
+      <div class="mdc-card__supporting-text">
+        <h2 data-fir-content="name">...</h2>
+        <div class="details">
+          Pin: <span class="info" data-fir-content="pin"></span>
+          <br/>
+          Value: <span class="info" data-fir-content="value"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -251,6 +271,30 @@
           Name:<textarea id="drinkname" rows="1"></textarea>
           Type:<textarea id="drinktype" rows="1"></textarea>
           Ingredients (format: {"orangejuice": 100, "vodka": 100}):<textarea id="drinkingredients"></textarea>
+      </section>
+      <footer class="mdc-dialog__footer">
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Save</button>
+      </footer>
+      </div>
+    </div>
+    <div class="mdc-dialog__backdrop"></div>
+  </aside>
+
+  <aside id="dialog-edit-pump" class="mdc-dialog">
+    <div class="mdc-dialog__surface">
+      <div class="page" id="page-all">
+        <header class="mdc-dialog__header">
+          <i class="material-icons">edit</i>
+          <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">
+            Edit Pump
+          </h2>
+        </header>
+        <section class="mdc-dialog__body">
+          <textarea hidden readonly id="pumpid"></textarea>
+          Name: <textarea readonly id="pumpname" rows="1"></textarea>
+          Pin: <textarea readonly id="pumppin" rows="1"></textarea>
+          Value: <textarea id="pumpvalue" rows="1"></textarea>
       </section>
       <footer class="mdc-dialog__footer">
         <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>

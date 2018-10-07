@@ -507,6 +507,18 @@
    padding: 10px;
  }
 
+ aside textarea:read-only{
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+  border-width: 0px 0px 0px 0px;
+  padding: 10px;
+}
+
  aside textarea:focus {
    outline: none;
+ }
+
+ #main-pump-adjusted {
+   margin-top: 60px;
  }
