@@ -28,7 +28,61 @@ Mixomator9000.prototype.viewHome = function() {
   this.getAllDrinks();
 };
 
-Mixomator9000.prototype.viewDrinks = function(filters, filter_description) {
+Mixomator9000.prototype.viewDrinks = function() {
+
+  var mainEl = this.renderTemplate('main-adjusted');
+  var headerEl = this.renderTemplate('header-base', {
+    hasSectionHeader: true
+  });
+
+  this.replaceElement(document.querySelector('.header'), headerEl);
+  this.replaceElement(document.querySelector('main'), mainEl);
+
+  var that = this;
+
+  var renderResults = function(doc) {
+    if (!doc) {
+      var headerEl = that.renderTemplate('header-base', {
+        hasSectionHeader: true
+      });
+
+      var noResultsEl = that.renderTemplate('no-results');
+
+      that.replaceElement(document.querySelector('.header'), headerEl);
+      that.replaceElement(document.querySelector('main'), noResultsEl);
+      return;
+    }
+    var data = doc.data();
+    data['.id'] = doc.id;
+    data['go_to_drink'] = function() {
+      var dialog = document.querySelector('#dialog-edit-drink');
+      dialog.querySelector('#drinkid').value = doc.id;
+      dialog.querySelector('#drinkname').value = data.name;
+      dialog.querySelector('#drinktype').value = data.type;
+      dialog.querySelector('#drinkingredients').value = JSON.stringify(data.ingredients);
+      that.dialogs.editdrink.show();
+    };
+
+    var el = that.renderTemplate('drink-card', data);
+
+    mainEl.querySelector('#cards').append(el);
+  };
+
+  this.getAllDrinks(renderResults);
+
+  var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
+  toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
+
+  var addEl = this.renderTemplate('add-drinks');
+  var button = addEl.querySelector('#add_drink');
+  var that = this;
+  button.addEventListener('click', function() {
+    that.dialogs.adddrink.show();
+  });
+  document.querySelector('main').append(addEl);  
+};
+
+Mixomator9000.prototype.viewMenu = function(filters, filter_description) {
   if (!filter_description) {
     filter_description = 'any type of drink';
   }
@@ -79,12 +133,12 @@ Mixomator9000.prototype.viewDrinks = function(filters, filter_description) {
     var data = doc.data();
     data['.id'] = doc.id;
     data['go_to_drink'] = function() {
-      var dialog = document.querySelector('#dialog-edit-drink');
+      var dialog = document.querySelector('#dialog-drink-details');
       dialog.querySelector('#drinkid').value = doc.id;
       dialog.querySelector('#drinkname').value = data.name;
       dialog.querySelector('#drinktype').value = data.type;
       dialog.querySelector('#drinkingredients').value = JSON.stringify(data.ingredients);
-      that.dialogs.editdrink.show();
+      that.dialogs.drinkdetails.show();
     };
 
     var el = that.renderTemplate('drink-card', data);
@@ -103,17 +157,7 @@ Mixomator9000.prototype.viewDrinks = function(filters, filter_description) {
   var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
   toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
 
-  var addEl = this.renderTemplate('add-drinks');
-  var button = addEl.querySelector('#add_drink');
-  var that = this;
-  button.addEventListener('click', function() {
-    that.dialogs.adddrink.show();
-  });
-  document.querySelector('main').append(addEl);
-
-  //mdc.autoInit();
-  
-};
+}
 
 Mixomator9000.prototype.viewPumps = function() {
   var headerEl = this.renderTemplate('header-base', {
@@ -287,6 +331,26 @@ Mixomator9000.prototype.initEditDrinkDialog = function() {
   });
 };
 
+Mixomator9000.prototype.initDrinkDetailsDialog = function() {
+  var dialog = document.querySelector('#dialog-drink-details');
+  this.dialogs.drinkdetails = new mdc.dialog.MDCDialog(dialog);
+
+  var that = this;
+  this.dialogs.drinkdetails.listen('MDCDialog:accept', function() {
+    /*var drinkid = dialog.querySelector('#drinkid').value;
+    var drinkname = dialog.querySelector('#drinkname').value;
+    var drinktype = dialog.querySelector('#drinktype').value;
+    var drinkingredients = JSON.parse(dialog.querySelector('#drinkingredients').value);
+    that.updateDrink(drinkid,{
+      name: drinkname,
+      type: drinktype,
+      ingredients: drinkingredients
+    }).then(function() {
+      that.rerender();
+    });*/
+  });
+};
+
 Mixomator9000.prototype.initEditPumpDialog = function() {
   var dialog = document.querySelector('#dialog-edit-pump');
   this.dialogs.editpump = new mdc.dialog.MDCDialog(dialog);
@@ -311,7 +375,7 @@ Mixomator9000.prototype.updateQuery = function(filters) {
     query_description += 'all drinks';
   }
 
-  this.viewDrinks(filters, query_description);
+  this.viewMenu(filters, query_description);
 };
 
 Mixomator9000.prototype.renderTemplate = function(id, data) {
@@ -426,28 +490,6 @@ Mixomator9000.prototype.getDeepItem = function(obj, path) {
     obj = obj[chunk];
   });
   return obj;
-};
-
-Mixomator9000.prototype.renderRating = function(rating) {
-  var el = this.renderTemplate('rating', {});
-  for (var r = 0; r < 5; r += 1) {
-    var star;
-    if (r < Math.floor(rating)) {
-      star = this.renderTemplate('star-icon', {});
-    } else {
-      star = this.renderTemplate('star-border-icon', {});
-    }
-    el.append(star);
-  }
-  return el;
-};
-
-Mixomator9000.prototype.renderPrice = function(price) {
-  var el = this.renderTemplate('price', {});
-  for (var r = 0; r < price; r += 1) {
-    el.append('$');
-  }
-  return el;
 };
 
 Mixomator9000.prototype.replaceElement = function(parent, content) {

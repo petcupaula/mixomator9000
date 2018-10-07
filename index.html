@@ -282,28 +282,52 @@
   </aside>
 
   <aside id="dialog-edit-drink" class="mdc-dialog">
-      <div class="mdc-dialog__surface">
-        <div class="page" id="page-all">
-          <header class="mdc-dialog__header">
-            <i class="material-icons">edit</i>
-            <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">
-              Edit Drink
-            </h2>
-          </header>
-          <section class="mdc-dialog__body">
-            <textarea hidden id="drinkid" rows="1"></textarea>
-            Name:<textarea id="drinkname" rows="1"></textarea>
-            Type:<textarea id="drinktype" rows="1"></textarea>
-            Ingredients (format: {"orangejuice": 100, "vodka": 100}):<textarea id="drinkingredients"></textarea>
-        </section>
-        <footer class="mdc-dialog__footer">
-          <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
-          <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Save</button>
-        </footer>
-        </div>
+    <div class="mdc-dialog__surface">
+      <div class="page" id="page-all">
+        <header class="mdc-dialog__header">
+          <i class="material-icons">edit</i>
+          <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">
+            Edit Drink
+          </h2>
+        </header>
+        <section class="mdc-dialog__body">
+          <textarea hidden id="drinkid" rows="1"></textarea>
+          Name:<textarea id="drinkname" rows="1"></textarea>
+          Type:<textarea id="drinktype" rows="1"></textarea>
+          Ingredients (format: {"orangejuice": 100, "vodka": 100}):<textarea id="drinkingredients"></textarea>
+      </section>
+      <footer class="mdc-dialog__footer">
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Save</button>
+      </footer>
       </div>
-      <div class="mdc-dialog__backdrop"></div>
-    </aside>
+    </div>
+    <div class="mdc-dialog__backdrop"></div>
+  </aside>
+
+  <aside id="dialog-drink-details" class="mdc-dialog">
+    <div class="mdc-dialog__surface">
+      <div class="page" id="page-all">
+        <header class="mdc-dialog__header">
+          <i class="material-icons">local_bar</i>
+          <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">
+            Drink
+          </h2>
+        </header>
+        <section class="mdc-dialog__body">
+          <textarea hidden id="drinkid" rows="1"></textarea>
+          Name:<textarea id="drinkname" readonly rows="1"></textarea>
+          Type:<textarea id="drinktype" readonly rows="1"></textarea>
+          Ingredients:<textarea readonly id="drinkingredients"></textarea>
+      </section>
+      <footer class="mdc-dialog__footer">
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Order</button>
+      </footer>
+      </div>
+    </div>
+    <div class="mdc-dialog__backdrop"></div>
+  </aside>
 
   <aside id="dialog-edit-pump" class="mdc-dialog">
     <div class="mdc-dialog__surface">

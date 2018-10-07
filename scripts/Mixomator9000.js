@@ -42,6 +42,7 @@ function Mixomator9000() {
       that.initAddDrinkDialog();
       that.initEditPumpDialog();
       that.initEditDrinkDialog();
+      that.initDrinkDetailsDialog();
     }).catch(function(err) {
       console.log(err);
     });
@@ -58,6 +59,11 @@ Mixomator9000.prototype.initRouter = function() {
     .on({
       '/': function() {
         that.updateQuery(that.filters);
+      }
+    })
+    .on({
+      '/drinks': function() {
+        that.viewDrinks();
       }
     })
     .on({
