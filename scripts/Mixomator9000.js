@@ -40,6 +40,7 @@ function Mixomator9000() {
       that.initRouter();
       that.initReviewDialog();
       that.initFilterDialog();
+      that.initAddDrinkDialog();
     }).catch(function(err) {
       console.log(err);
     });

@@ -196,7 +196,7 @@
   <ul hidden class="template mdc-list" id="all-filters-list">
     
     <li id="show-page-type" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
-      <i class="material-icons">sort</i>
+      <i class="material-icons">local_bar</i>
       <span data-fir-if-not="type">Any Type</span>
       <b data-fir-content="type"></b>
     </li>
@@ -220,7 +220,7 @@
       </div>
       <div class="page" id="page-type">
         <header class="mdc-dialog__header">
-          <i class="material-icons">sort</i>
+          <i class="material-icons">local_bar</i>
           <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">
             Type
           </h2>
@@ -231,6 +231,29 @@
         <footer class="mdc-dialog__footer">
           <button type="button" class="mdc-button mdc-dialog__footer__button back">Back</button>
         </footer>
+      </div>
+    </div>
+    <div class="mdc-dialog__backdrop"></div>
+  </aside>
+
+  <aside id="dialog-add-drink" class="mdc-dialog">
+    <div class="mdc-dialog__surface">
+      <div class="page" id="page-all">
+        <header class="mdc-dialog__header">
+          <i class="material-icons">add_circle</i>
+          <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__header__title">
+            Add Drink
+          </h2>
+        </header>
+        <section class="mdc-dialog__body">
+          Name:<textarea id="drinkname" rows="1"></textarea>
+          Type:<textarea id="drinktype" rows="1"></textarea>
+          Ingredients (format: {"orangejuice": 100, "vodka": 100}):<textarea id="drinkingredients"></textarea>
+      </section>
+      <footer class="mdc-dialog__footer">
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Save</button>
+      </footer>
       </div>
     </div>
     <div class="mdc-dialog__backdrop"></div>
