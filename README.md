@@ -21,6 +21,14 @@ Follow these steps to setup and run the quickstart:
     ```bash
     firebase deploy --only firestore
     ```
+1. Deploy the Functions only:
+    ```bash
+    firebase deploy --only function
+    ```
+1. Deploy everything:
+    ```bash
+    firebase deploy
+    ```
  1. Run a local server:
     ```bash
     firebase serve
