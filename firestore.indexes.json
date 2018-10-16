@@ -1,0 +1,17 @@
+{
+    "indexes" : [
+        {
+            "collectionId": "drinks",
+            "fields": [
+                {
+                    "fieldPath": "available",
+                    "mode": "ASCENDING"
+                },
+                {
+                    "fieldPath": "name",
+                    "mode": "ASCENDING"
+                }
+            ]
+        }
+    ]
+}

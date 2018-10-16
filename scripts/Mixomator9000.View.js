@@ -147,11 +147,11 @@ Mixomator9000.prototype.viewMenu = function(filters, filter_description) {
   };
 
   if (filters.type ) {
-    this.getFilteredDrinks({
+    this.getAvailableFilteredDrinks({
       type: filters.type || 'Any'
     }, renderResults);
   } else {
-    this.getAllDrinks(renderResults);
+    this.getAvailableDrinks(renderResults);
   }
 
   var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
@@ -302,6 +302,7 @@ Mixomator9000.prototype.initAddDrinkDialog = function() {
     var drinktype = dialog.querySelector('#drinktype').value;
     var drinkingredients = JSON.parse(dialog.querySelector('#drinkingredients').value);
     that.addDrink({
+      available: false,
       name: drinkname,
       type: drinktype,
       ingredients: drinkingredients

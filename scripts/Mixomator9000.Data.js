@@ -28,6 +28,15 @@ Mixomator9000.prototype.getAllDrinks = function(render) {
   this.getDocumentsInQuery(query, render);
 };
 
+Mixomator9000.prototype.getAvailableDrinks = function(render) {
+  var query = firebase.firestore()
+    .collection('drinks')
+    .where('available', '==', true)
+    .orderBy('name', 'asc')
+    .limit(50);
+  this.getDocumentsInQuery(query, render);
+};
+
 Mixomator9000.prototype.getAllPumps = function(render) {
   var query = firebase.firestore()
     .collection('pumps')
@@ -56,6 +65,17 @@ Mixomator9000.prototype.getDrink = function(id) {
 
 Mixomator9000.prototype.getFilteredDrinks = function(filters, render) {
   var query = firebase.firestore().collection('drinks');
+
+  if (filters.type !== 'Any') {
+    query = query.where('type', '==', filters.type);
+  }
+
+  this.getDocumentsInQuery(query, render);
+};
+
+Mixomator9000.prototype.getAvailableFilteredDrinks = function(filters, render) {
+  var query = firebase.firestore().collection('drinks');
+  query = query.where('available', '==', true);
 
   if (filters.type !== 'Any') {
     query = query.where('type', '==', filters.type);
