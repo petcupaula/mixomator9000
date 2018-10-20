@@ -338,12 +338,12 @@ Mixomator9000.prototype.initDrinkDetailsDialog = function() {
 
   var that = this;
   this.dialogs.drinkdetails.listen('MDCDialog:accept', function() {
-    var drinkname = dialog.querySelector('#drinkname').value;
-    that.sendOrder(drinkname);
+    var drinkid = dialog.querySelector('#drinkid').value;
+    that.sendOrder(drinkid);
   });
 };
 
-Mixomator9000.prototype.sendOrder = function(drinkname) {
+Mixomator9000.prototype.sendOrder = function(drinkid) {
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open("POST", "https://io.adafruit.com/api/v2/"+this.AIOUser+"/feeds/"+this.AIOFeed+"/data", true );
   xmlHttp.setRequestHeader('X-AIO-Key', this.AIOKey);
@@ -359,7 +359,7 @@ Mixomator9000.prototype.sendOrder = function(drinkname) {
       }
     }
   }
-  xmlHttp.send('{"value":"'+drinkname+'"}');
+  xmlHttp.send('{"value":"'+drinkid+'"}');
 };
 
 Mixomator9000.prototype.initEditPumpDialog = function() {
