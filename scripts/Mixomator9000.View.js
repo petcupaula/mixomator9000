@@ -345,7 +345,7 @@ Mixomator9000.prototype.initDrinkDetailsDialog = function() {
 
 Mixomator9000.prototype.sendOrder = function(drinkname) {
   var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open("POST", "https://io.adafruit.com/api/v2/ppaula/feeds/drink/data", true );
+  xmlHttp.open("POST", "https://io.adafruit.com/api/v2/"+this.AIOUser+"/feeds/"+this.AIOFeed+"/data", true );
   xmlHttp.setRequestHeader('X-AIO-Key', this.AIOKey);
   xmlHttp.setRequestHeader("Content-Type", "application/json");
   xmlHttp.onreadystatechange = function() {
