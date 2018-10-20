@@ -338,18 +338,28 @@ Mixomator9000.prototype.initDrinkDetailsDialog = function() {
 
   var that = this;
   this.dialogs.drinkdetails.listen('MDCDialog:accept', function() {
-    /*var drinkid = dialog.querySelector('#drinkid').value;
     var drinkname = dialog.querySelector('#drinkname').value;
-    var drinktype = dialog.querySelector('#drinktype').value;
-    var drinkingredients = JSON.parse(dialog.querySelector('#drinkingredients').value);
-    that.updateDrink(drinkid,{
-      name: drinkname,
-      type: drinktype,
-      ingredients: drinkingredients
-    }).then(function() {
-      that.rerender();
-    });*/
+    that.sendOrder(drinkname);
   });
+};
+
+Mixomator9000.prototype.sendOrder = function(drinkname) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("POST", "https://io.adafruit.com/api/v2/ppaula/feeds/drink/data", true );
+  xmlHttp.setRequestHeader('X-AIO-Key', this.AIOKey);
+  xmlHttp.setRequestHeader("Content-Type", "application/json");
+  xmlHttp.onreadystatechange = function() {
+    if(this.readyState == XMLHttpRequest.DONE) {
+      if (this.status == 200) {
+        //console.log(xmlHttp.responseText);
+        alert('Your order has been sent!');
+      }
+      else {
+        alert('Ooops... Something went wrong and could not send your order.');
+      }
+    }
+  }
+  xmlHttp.send('{"value":"'+drinkname+'"}');
 };
 
 Mixomator9000.prototype.initEditPumpDialog = function() {

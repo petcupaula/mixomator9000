@@ -16,7 +16,7 @@
 'use strict';
 
 /**
- * Initializes the FriendlyEats app.
+ * Initializes the app.
  */
 function Mixomator9000() {
   this.filters = {
