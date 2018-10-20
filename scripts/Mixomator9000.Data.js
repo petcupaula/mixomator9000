@@ -17,7 +17,12 @@
 
 Mixomator9000.prototype.addDrink = function(data) {
   var collection = firebase.firestore().collection('drinks');
-  return collection.add(data);
+  var that = this;
+  return collection.add(data)
+  .then(function() {
+    //console.log("Document successfully updated!");
+    that.updateMenu();
+  });
 };
 
 Mixomator9000.prototype.getAllDrinks = function(render) {
@@ -88,11 +93,13 @@ Mixomator9000.prototype.updatePump = function(pumpID, val) {
   var collection = firebase.firestore().collection('pumps');
   var document = collection.doc(pumpID);
 
+  var that = this;
   return document.update({value: val})
-  /*.then(function() {
-      console.log("Document successfully updated!");
+  .then(function() {
+      //console.log("Document successfully updated!");
+      that.updateMenu();
   })
-  .catch(function(error) {
+  /*.catch(function(error) {
       // The document probably doesn't exist.
       console.error("Error updating document: ", error);
   })*/;
@@ -101,12 +108,43 @@ Mixomator9000.prototype.updatePump = function(pumpID, val) {
 Mixomator9000.prototype.updateDrink = function(drinkId, data) {
   var collection = firebase.firestore().collection('drinks');
   var document = collection.doc(drinkId);
+
+  var that = this;
   return document.update(data)
-  /*.then(function() {
-      console.log("Document successfully updated!");
+  .then(function() {
+      //console.log("Document successfully updated!");
+      that.updateMenu();
   })
-  .catch(function(error) {
+  /*.catch(function(error) {
       // The document probably doesn't exist.
       console.error("Error updating document: ", error);
   })*/;
 };
+
+Mixomator9000.prototype.updateMenu = function() { 
+	let drinks = firebase.firestore().collection('drinks').get();
+	let pumps = firebase.firestore().collection('pumps').get();
+	return Promise.all([drinks, pumps]).then((res) => {
+	   let allDrinks = res[0];
+	   let allPumps = res[1];
+	   let ingredients = allPumps.docs.map(
+	       pump => pump.get('value')
+	   ).filter(
+	       ingredient => {return ingredient; }
+	   ).reduce((map, obj) => { map[obj] = true; return map; }, {});
+	   let batch = firebase.firestore().batch();
+	   allDrinks.forEach(drink => {
+		   let drinkIngredients = drink.get('ingredients');
+		   if (Object.keys(drinkIngredients).some((ingredient) => !ingredients[ingredient])) {
+			   if (drink.get('available')) { 
+				batch.update(drink.ref, {available: false});
+			   }
+		   } else {
+			   if (!drink.get('available')) {
+				batch.update(drink.ref, {available: true});
+			   }
+	           }
+            });
+	    return batch.commit();
+	}).catch(err => console.log(err));
+}
