@@ -54,12 +54,13 @@ Mixomator9000.prototype.viewDrinks = function() {
     }
     var data = doc.data();
     data['.id'] = doc.id;
+    data['photo'] = 
+    "https://firebasestorage.googleapis.com/v0/b/mixomator9000.appspot.com/o/images%2F"+data.photo+"?alt=media&token=3f30dffe-4352-4303-9206-60f412412f10";
     data['go_to_drink'] = function() {
       var dialog = document.querySelector('#dialog-edit-drink');
       dialog.querySelector('#drinkid').value = doc.id;
       dialog.querySelector('#drinkname').value = data.name;
       dialog.querySelector('#drinktype').value = data.type;
-      dialog.querySelector('#drinkphoto').value = data.photo;
       dialog.querySelector('#drinkingredients').value = JSON.stringify(data.ingredients);
       that.dialogs.editdrink.show();
     };
@@ -133,6 +134,8 @@ Mixomator9000.prototype.viewMenu = function(filters, filter_description) {
     }
     var data = doc.data();
     data['.id'] = doc.id;
+    data['photo'] = 
+    "https://firebasestorage.googleapis.com/v0/b/mixomator9000.appspot.com/o/images%2F"+data.photo+"?alt=media&token=3f30dffe-4352-4303-9206-60f412412f10";
     data['go_to_drink'] = function() {
       var dialog = document.querySelector('#dialog-drink-details');
       dialog.querySelector('#drinkid').value = doc.id;
@@ -317,19 +320,43 @@ Mixomator9000.prototype.initAddDrinkDialog = function() {
   this.dialogs.adddrink.listen('MDCDialog:accept', function() {
     var drinkname = dialog.querySelector('#drinkname').value;
     var drinktype = dialog.querySelector('#drinktype').value;
-    var drinkphoto = dialog.querySelector('#drinkphoto').value;
     var drinkingredients = JSON.parse(dialog.querySelector('#drinkingredients').value);
-    that.addDrink({
-      available: false,
-      name: drinkname,
-      type: drinktype,
-      photo: drinkphoto,
-      ingredients: drinkingredients
-    }).then(function() {
-      that.rerender();
-    });
+    var selectedFile = document.querySelector('.file-select').files[0];
+    if (typeof selectedFile != "undefined") {
+      that.addDrink({
+        available: false,
+        name: drinkname,
+        type: drinktype,
+        photo: selectedFile.name,
+        ingredients: drinkingredients
+      }).then(function() {
+        that.handleFileUploadSubmit(selectedFile);
+        that.rerender();
+      });
+    } else {
+      that.addDrink({
+        available: false,
+        name: drinkname,
+        type: drinktype,
+        photo: "noimage.png",
+        ingredients: drinkingredients
+      }).then(function() {
+        that.rerender();
+      });
+    }
   });
 };
+
+Mixomator9000.prototype.handleFileUploadSubmit = function(selectedFile) {
+  const uploadTask = this.storageRef.child(`images/${selectedFile.name}`).put(selectedFile); 
+  uploadTask.on('state_changed', (snapshot) => {
+  }, (error) => {
+    console.log(error);
+  }, () => {
+     console.log('success');
+  });
+  return;
+}
 
 Mixomator9000.prototype.initEditDrinkDialog = function() {
   var dialog = document.querySelector('#dialog-edit-drink');
@@ -340,16 +367,28 @@ Mixomator9000.prototype.initEditDrinkDialog = function() {
     var drinkid = dialog.querySelector('#drinkid').value;
     var drinkname = dialog.querySelector('#drinkname').value;
     var drinktype = dialog.querySelector('#drinktype').value;
-    var drinkphoto = dialog.querySelector('#drinkphoto').value;
     var drinkingredients = JSON.parse(dialog.querySelector('#drinkingredients').value);
-    that.updateDrink(drinkid,{
-      name: drinkname,
-      type: drinktype,
-      photo: drinkphoto,
-      ingredients: drinkingredients
-    }).then(function() {
-      that.rerender();
-    });
+    var selectedFile = document.querySelector('.file-update').files[0];
+    if (typeof selectedFile != "undefined") {
+      that.updateDrink(drinkid,{
+          name: drinkname,
+          type: drinktype,
+          photo: selectedFile.name,
+          ingredients: drinkingredients
+        }).then(function() {
+          that.handleFileUploadSubmit(selectedFile);
+          that.rerender();
+        });
+    }
+    else {
+      that.updateDrink(drinkid,{
+        name: drinkname,
+        type: drinktype,
+        ingredients: drinkingredients
+      }).then(function() {
+        that.rerender();
+      });
+    }
   });
 };
 

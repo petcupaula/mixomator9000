@@ -290,11 +290,11 @@
         <section class="mdc-dialog__body">
           Name:<textarea id="drinkname" rows="1"></textarea>
           Ingredients (format: {"orangejuice": 100, "vodka": 100}):<textarea id="drinkingredients"></textarea>
-          Photo (URL to image):<textarea id="drinkphoto" rows="1"></textarea>
           Type: <select id="drinktype">
             <option value="alcoholic">alcoholic</option>
             <option value="nonalcoholic">nonalcoholic</option>
           </select><br/>
+          Photo: <input type="file" class="file-select" accept="image/*"/>
       </section>
       <footer class="mdc-dialog__footer">
         <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
@@ -318,11 +318,11 @@
           <textarea hidden id="drinkid" rows="1"></textarea>
           Name:<textarea id="drinkname" rows="1"></textarea>
           Ingredients (format: {"orangejuice": 100, "vodka": 100}):<textarea id="drinkingredients"></textarea>
-          Photo (URL to image):<textarea id="drinkphoto" rows="1"></textarea>
           Type: <select id="drinktype">
               <option value="alcoholic">alcoholic</option>
               <option value="nonalcoholic">nonalcoholic</option>
             </select><br/>
+          Photo: <input type="file" class="file-update" accept="image/*"/>
       </section>
       <footer class="mdc-dialog__footer">
         <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
@@ -386,6 +386,7 @@
 <script src="/__/firebase/5.5.3/firebase-app.js"></script>
 <script src="/__/firebase/5.5.3/firebase-auth.js"></script>
 <script src="/__/firebase/5.5.3/firebase-firestore.js"></script>
+<script src="/__/firebase/5.5.5/firebase-storage.js"></script>
 <script src="/__/firebase/init.js"></script>
 
 <script src="//unpkg.com/navigo@6"></script>

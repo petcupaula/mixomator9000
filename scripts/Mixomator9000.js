@@ -27,6 +27,9 @@ function Mixomator9000() {
 
   var that = this;
 
+  const storageService = firebase.storage();
+  this.storageRef = storageService.ref();
+
   firebase.firestore().settings({
     timestampsInSnapshots: true
   });
@@ -49,7 +52,7 @@ function Mixomator9000() {
 }
 
 /**
- * Initializes the router for the FriendlyEats app.
+ * Initializes the router for the app.
  */
 Mixomator9000.prototype.initRouter = function() {
   this.router = new Navigo();
