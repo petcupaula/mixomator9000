@@ -214,6 +214,7 @@
 
  .mdc-card {
    background: linear-gradient(white, #f9f9f9);
+   background-size: 350px;
    justify-content: space-between;
  }
 

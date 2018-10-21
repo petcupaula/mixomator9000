@@ -184,7 +184,7 @@
   </div>
 
   <div hidden class="template mdc-layout-grid__cell mdc-layout-grid__cell--span-4" id="drink-card">
-    <div class="location-card mdc-card mdc-shadow--2dp" data-fir-click="go_to_drink">
+    <div class="location-card mdc-card mdc-shadow--2dp" data-fir-click="go_to_drink" data-fir-style="backgroundImage:photo">
       <div class="mdc-card__title"></div>
       <div class="mdc-card__supporting-text">
         <h2 data-fir-content="name">...</h2>
@@ -290,6 +290,7 @@
         <section class="mdc-dialog__body">
           Name:<textarea id="drinkname" rows="1"></textarea>
           Ingredients (format: {"orangejuice": 100, "vodka": 100}):<textarea id="drinkingredients"></textarea>
+          Photo (URL to image):<textarea id="drinkphoto" rows="1"></textarea>
           Type: <select id="drinktype">
             <option value="alcoholic">alcoholic</option>
             <option value="nonalcoholic">nonalcoholic</option>
@@ -317,10 +318,11 @@
           <textarea hidden id="drinkid" rows="1"></textarea>
           Name:<textarea id="drinkname" rows="1"></textarea>
           Ingredients (format: {"orangejuice": 100, "vodka": 100}):<textarea id="drinkingredients"></textarea>
+          Photo (URL to image):<textarea id="drinkphoto" rows="1"></textarea>
           Type: <select id="drinktype">
-            <option value="alcoholic">alcoholic</option>
-            <option value="nonalcoholic">nonalcoholic</option>
-          </select><br/>
+              <option value="alcoholic">alcoholic</option>
+              <option value="nonalcoholic">nonalcoholic</option>
+            </select><br/>
       </section>
       <footer class="mdc-dialog__footer">
         <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
