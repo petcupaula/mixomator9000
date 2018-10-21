@@ -83,6 +83,11 @@ Mixomator9000.prototype.initRouter = function() {
         that.viewPumps();
       }
     })
+    .on({
+      '/clean': function() {
+        that.viewClean();
+      }
+    })
     .resolve();
 
   firebase

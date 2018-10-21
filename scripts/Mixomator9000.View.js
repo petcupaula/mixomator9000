@@ -225,6 +225,22 @@ Mixomator9000.prototype.viewSetup = function() {
     });
 };
 
+Mixomator9000.prototype.viewClean = function() {
+  var headerEl = this.renderTemplate('header-base', {
+    hasSectionHeader: false
+  });
+  this.replaceElement(document.querySelector('.header'), headerEl);
+  
+  var mainEl = this.renderTemplate('clean');
+  var button = mainEl.querySelector('#clean_button');
+  var that = this;
+  button.addEventListener('click', function() {
+    that.sendOrder('clean');
+  });
+
+  this.replaceElement(document.querySelector('main'), mainEl);
+}
+
 Mixomator9000.prototype.initFilterDialog = function() {
   // TODO: Reset filter dialog to init state on close.
   this.dialogs.filter = new mdc.dialog.MDCDialog(document.querySelector('#dialog-filter-all'));
