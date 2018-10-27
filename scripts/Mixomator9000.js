@@ -60,7 +60,7 @@ Mixomator9000.prototype.initRouter = function() {
   var that = this;
   this.router
     .on({
-      '/': function() {
+      '/order': function() {
         that.updateQuery(that.filters);
       }
     })
@@ -105,7 +105,7 @@ Mixomator9000.prototype.initRouter = function() {
 };
 
 Mixomator9000.prototype.getCleanPath = function(dirtyPath) {
-  if (dirtyPath.startsWith('/index.html')) {
+  if (dirtyPath.startsWith('/order.html')) {
     return dirtyPath.split('/').slice(1).join('/');
   } else {
     return dirtyPath;

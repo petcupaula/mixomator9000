@@ -21,7 +21,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html"
+        "destination": "/order.html"
       }
     ]
   },
