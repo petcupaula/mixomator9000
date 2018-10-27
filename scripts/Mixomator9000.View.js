@@ -54,8 +54,7 @@ Mixomator9000.prototype.viewDrinks = function() {
     }
     var data = doc.data();
     data['.id'] = doc.id;
-    data['photo'] = 
-    "https://firebasestorage.googleapis.com/v0/b/mixomator9000.appspot.com/o/images%2F"+data.photo+"?alt=media&token=3f30dffe-4352-4303-9206-60f412412f10";
+    data['photo'] = that.FirebasePhotoPart1 + data.photo + that.FirebasePhotoPart2;
     data['go_to_drink'] = function() {
       var dialog = document.querySelector('#dialog-edit-drink');
       dialog.querySelector('#drinkid').value = doc.id;
@@ -134,8 +133,7 @@ Mixomator9000.prototype.viewMenu = function(filters, filter_description) {
     }
     var data = doc.data();
     data['.id'] = doc.id;
-    data['photo'] = 
-    "https://firebasestorage.googleapis.com/v0/b/mixomator9000.appspot.com/o/images%2F"+data.photo+"?alt=media&token=3f30dffe-4352-4303-9206-60f412412f10";
+    data['photo'] = that.FirebasePhotoPart1 + data.photo + that.FirebasePhotoPart2;
     data['go_to_drink'] = function() {
       var dialog = document.querySelector('#dialog-drink-details');
       dialog.querySelector('#drinkid').value = doc.id;
